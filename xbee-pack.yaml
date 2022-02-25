@@ -1,0 +1,19 @@
+schema-version: 1.0
+
+type: builder
+
+in:
+  version: 3.1
+
+provision:
+  - url:
+      from: http://ftp.gnu.org/pub/gnu/gperf/gperf-{% version %}.tar.gz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix=/usr
+        - make
+        - make install DESTDIR={% xbeeOut %}
+      directory: "{% xbeeSrc %}/gperf-{% version %}"
