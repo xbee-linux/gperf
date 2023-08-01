@@ -2,18 +2,18 @@ schema-version: 1.0
 
 type: builder
 
-in:
+var:
   version: 3.1
 
 provision:
   - url:
-      from: http://ftp.gnu.org/pub/gnu/gperf/gperf-{% version %}.tar.gz
-      todir: "{% xbeeSrc %}"
+      from: http://ftp.gnu.org/pub/gnu/gperf/gperf-{{ .version }}.tar.gz
+      todir: "{{ .xbee.src }}"
 
 build:
   - shell:
       cmds:
         - ./configure --prefix=/usr
         - make
-        - make install DESTDIR={% xbeeOut %}
-      directory: "{% xbeeSrc %}/gperf-{% version %}"
+        - make install DESTDIR={{ .xbee.out }}
+      directory: "{{ .xbee.src }}/gperf-{{ .version }}"
